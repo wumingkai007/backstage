@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuxiaotian.user.mapper.SysUserMapper">
+    <select id="findUser" resultType="com.wuxiaotian.user.entity.SysUser">
+            SELECT * FROM SYS_USER WHERE ACCOUNT = #{account}
+    </select>
+    <select id="selectListUser" resultType="com.wuxiaotian.user.model.UserPageModel">
+        SELECT USER_NAME,ACCOUNT,USER_STATUS,AGE,GENDER,USER_ID FROM SYS_USER
+    </select>
+</mapper>
