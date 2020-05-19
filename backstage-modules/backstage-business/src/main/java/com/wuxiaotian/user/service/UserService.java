@@ -2,6 +2,7 @@ package com.wuxiaotian.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wuxiaotian.user.entity.SysUser;
+import com.wuxiaotian.user.model.UserModel;
 import com.wuxiaotian.user.model.UserPageModel;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface UserService extends IService<SysUser> {
 
     void saveUser(UserPageModel userPageModel);
 
-    void deleteUser(List<Integer> listUserId);
+    void deleteUser(List<UserModel> userModels);
 }

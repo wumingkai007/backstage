@@ -3,6 +3,7 @@ package com.wuxiaotian.user.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.wuxiaotian.user.model.UserModel;
 import com.wuxiaotian.user.model.UserPageModel;
 import com.wuxiaotian.user.service.UserService;
 import com.wuxiaotian.util.JsonResult;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -45,11 +48,10 @@ public class SysUserController {
         return jsonResult;
     }
 
-    @RequestMapping(value = "deleetListUser",method = RequestMethod.POST)
-    public JsonResult deleetListUser(@RequestBody String userstr){
+    @RequestMapping(value = "deleetListUser",method = RequestMethod.POST,consumes = "application/json")
+    public JsonResult deleetListUser(@RequestBody List<UserModel> userModels){
         JsonResult  jsonResult = new JsonResult(ResponseCode.SUCCESS);
-        List<Integer> integerList = JSONArray.parseArray(userstr,Integer.class);
-      //  userService.deleteUser(list);
+        userService.deleteUser(userModels);
         return jsonResult;
     }
 

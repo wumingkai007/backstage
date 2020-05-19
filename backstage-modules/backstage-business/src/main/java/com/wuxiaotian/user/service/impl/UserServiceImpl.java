@@ -3,6 +3,7 @@ package com.wuxiaotian.user.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wuxiaotian.user.entity.SysUser;
 import com.wuxiaotian.user.mapper.SysUserMapper;
+import com.wuxiaotian.user.model.UserModel;
 import com.wuxiaotian.user.model.UserPageModel;
 import com.wuxiaotian.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +49,12 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> implemen
 
     /**
      *删除用户
-     * @param listUserId
+     * @param userModels
      */
     @Override
-    public void deleteUser(List<Integer> listUserId) {
-        for (Integer integer : listUserId) {
-            sysUserMapper.deleteById(integer);
+    public void deleteUser(List<UserModel> userModels) {
+        for (UserModel userModel : userModels) {
+            sysUserMapper.deleteById(userModel.getId());
         }
     }
 }

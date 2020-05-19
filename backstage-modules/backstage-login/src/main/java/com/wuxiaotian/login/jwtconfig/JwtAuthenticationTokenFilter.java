@@ -41,8 +41,17 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String completeToken = httpServletRequest.getHeader(this.jwtTokenUtils.getTokenHeader());
         // 验证 值是否以"Bearer "开头
         if (completeToken != null) {
+
             // 根据 token值，获取 用户的 username
             String username = jwtTokenUtils.getUsernameFromToken(completeToken);
+            if(username == null){ //如果获取的用户为null
+                //判断token是否过期
+                boolean booflag = jwtTokenUtils.isTokenExpired(completeToken);
+                if(booflag){ // 过期了，重新刷选token，并在请求头中返回
+                    String newToken = jwtTokenUtils.refreshToken(completeToken);
+                    username =  jwtTokenUtils.getUsernameFromToken(newToken);
+                }
+            }
             log.debug("当前登录的用户是 : {} ", username);
             // 验证用户账号是否合法
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

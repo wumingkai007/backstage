@@ -15,4 +15,6 @@ public class UserModel {
     private String account;
     //密码
     private String password;
+
+    private Integer id;
 }
