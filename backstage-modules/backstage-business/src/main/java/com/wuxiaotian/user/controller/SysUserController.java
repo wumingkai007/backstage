@@ -9,6 +9,7 @@ import com.wuxiaotian.user.service.UserService;
 import com.wuxiaotian.util.JsonResult;
 import com.wuxiaotian.util.ResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

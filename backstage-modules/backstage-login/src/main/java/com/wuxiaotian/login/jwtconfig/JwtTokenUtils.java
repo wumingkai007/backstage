@@ -1,6 +1,7 @@
 package com.wuxiaotian.login.jwtconfig;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
@@ -58,9 +59,9 @@ public class JwtTokenUtils implements Serializable {
         Claims claims;
         try {
             claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-        } catch (Exception e) {
+        } catch (ExpiredJwtException e) {
             e.printStackTrace();
-            claims = null;
+            claims = e.getClaims();
         }
         return claims;
     }
@@ -73,8 +74,8 @@ public class JwtTokenUtils implements Serializable {
      */
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>(2);
-        claims.put("sub", userDetails.getUsername());
-        claims.put("created", new Date());
+        claims.put(CLAIM_KEY_USER_ACCOUNT, userDetails.getUsername());
+        claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
     }
 
@@ -90,6 +91,7 @@ public class JwtTokenUtils implements Serializable {
             Claims claims = getClaimsFromToken(token);
             username = claims.getSubject();
         } catch (Exception e) {
+            e.printStackTrace();
             username = null;
         }
         return username;
