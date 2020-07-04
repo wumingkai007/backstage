@@ -10,20 +10,41 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>backstage-start</artifactId>
-
+    <packaging>jar</packaging>
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>com.wuxiaotian</groupId>
             <artifactId>backstage-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.wuxiaotian</groupId>
             <artifactId>backstage-login</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!--<dependency>
+            <groupId>com.wuxiaotian</groupId>
+            <artifactId>backstage-business</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>-->
     </dependencies>
     <build>
-
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 指定该Main Class为全局的唯一入口 -->
+                    <mainClass>com.wuxiaotian.Application</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
