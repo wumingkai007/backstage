@@ -58,7 +58,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login/**").permitAll()
+                .antMatchers("/api/login/**").permitAll()
                 .antMatchers("/haha").permitAll()
                 .antMatchers("/sysUser/test").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").anonymous()
